@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
-import {Link} from '../routes'
+import { Link } from '../routes'
 import axios from 'axios';
+import BasePage from '../components/BasePage';
 
 class PortfoliosPage extends Component {
-  
+
   static async getInitialProps(context) {
     let posts = [];
 
@@ -14,11 +15,11 @@ class PortfoliosPage extends Component {
     } catch (err) {
       console.log(err);
     }
-    return {posts: posts.splice(0, 10)};
+    return { posts: posts.splice(0, 10) };
   }
 
   renderPosts = posts => (
-    posts.map(post => 
+    posts.map(post =>
       <li key={post.id}>
         <Link route={`/portfolio/${post.id}`}>
           <a>{post.title}</a>
@@ -28,13 +29,15 @@ class PortfoliosPage extends Component {
   );
 
   render() {
-    const {posts} = this.props;
+    const { posts } = this.props;
     return (
       <BaseLayout>
-        <h1>Portfolios Page</h1>
-        <ul>
-          {this.renderPosts(posts)}
-        </ul>
+        <BasePage>
+          <h1>Portfolios Page</h1>
+          <ul>
+            {this.renderPosts(posts)}
+          </ul>
+        </BasePage>
       </BaseLayout>
     );
   }
